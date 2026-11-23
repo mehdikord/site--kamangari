@@ -1,0 +1,196 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/vazirmatn/wght.css";
+@import "@fontsource-variable/estedad/wght.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Kamangiri palette: white space, graphite steel and the orange of a lit coal.
+ * The blue of a jet flame is only used as light inside the hero.
+ */
+:root {
+  --carbon: #15171c;
+  --graphite: #23262e;
+  --mist: #f3f4f6;
+  --brand: #bd3a0b;
+  --flare: #ff7a45;
+  --jet: #7fb0ff;
+  --success: #0f6b64;
+  --danger: #b3261e;
+  --star: #f2a93b;
+
+  --header-h: 3.75rem;
+
+  --background: #fff;
+  --foreground: var(--carbon);
+  --card: #fff;
+  --card-foreground: var(--carbon);
+  --popover: #fff;
+  --popover-foreground: var(--carbon);
+  --primary: var(--carbon);
+  --primary-foreground: #fff;
+  --secondary: #eceef1;
+  --secondary-foreground: var(--carbon);
+  --muted: var(--mist);
+  --muted-foreground: #5a606b;
+  --accent: #fff0e9;
+  --accent-foreground: var(--carbon);
+  --destructive: var(--danger);
+  --border: #e6e8eb;
+  --input: #d4d7dd;
+  --ring: var(--brand);
+  --radius: 0.75rem;
+}
+
+@media (min-width: 64rem) {
+  :root {
+    --header-h: 7.25rem;
+  }
+}
+
+/* shadcn components pick these up whenever they sit on a dark surface */
+.on-dark {
+  --foreground: #fff;
+  --muted-foreground: #a7adb8;
+  --border: rgb(255 255 255 / 0.12);
+  --input: rgb(255 255 255 / 0.24);
+  --ring: var(--flare);
+  color: #fff;
+}
+
+@theme inline {
+  --color-carbon: var(--carbon);
+  --color-graphite: var(--graphite);
+  --color-mist: var(--mist);
+  --color-brand: var(--brand);
+  --color-flare: var(--flare);
+  --color-jet: var(--jet);
+  --color-success: var(--success);
+  --color-danger: var(--danger);
+  --color-star: var(--star);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --font-sans: "Vazirmatn Variable", Tahoma, sans-serif;
+  --font-heading: "Estedad Variable", "Vazirmatn Variable", Tahoma, sans-serif;
+
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.75);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.35);
+  --radius-2xl: calc(var(--radius) * 1.65);
+  --radius-3xl: calc(var(--radius) * 2);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+    -webkit-tap-highlight-color: transparent;
+    scroll-padding-top: calc(var(--header-h) + 1rem);
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    line-height: 1.75;
+    text-size-adjust: 100%;
+  }
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled),
+  label[for],
+  summary {
+    cursor: pointer;
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 3px;
+  }
+}
+
+@utility shell {
+  width: min(100% - 2rem, 80rem);
+  margin-inline: auto;
+}
+
+@utility heading {
+  font-family: "Estedad Variable", "Vazirmatn Variable", Tahoma, sans-serif;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+/* the type scale: deliberately restrained */
+@utility title-page {
+  font-size: 1.375rem;
+  @variant lg {
+    font-size: 1.75rem;
+  }
+}
+
+@utility title-section {
+  font-size: 1.125rem;
+  @variant lg {
+    font-size: 1.375rem;
+  }
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* age gate: decided by an inline script before first paint, so it never flashes */
+html[data-age="ok"] .age-gate {
+  display: none;
+}
+html:not([data-age="ok"]) body {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+  }
+}

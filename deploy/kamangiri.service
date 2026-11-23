@@ -1,0 +1,38 @@
+[Unit]
+Description=Kamangiri storefront (Next.js)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=kamangiri
+Group=kamangiri
+WorkingDirectory=/opt/kamangiri/current
+Environment=NODE_ENV=production
+Environment=NEXT_TELEMETRY_DISABLED=1
+Environment=HOSTNAME=127.0.0.1
+Environment=PORT=3000
+# optional overrides, for example PORT=3100 or HOSTNAME=0.0.0.0
+EnvironmentFile=-/etc/kamangiri.env
+ExecStart=/usr/bin/node server.js
+Restart=always
+RestartSec=3
+TimeoutStopSec=20
+MemoryMax=1G
+LimitNOFILE=65535
+
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX AF_NETLINK
+# Next.js writes its image cache inside the release
+ReadWritePaths=/opt/kamangiri/releases
+
+[Install]
+WantedBy=multi-user.target
