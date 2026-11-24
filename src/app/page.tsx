@@ -7,7 +7,6 @@ import { Hero } from "@/components/home/hero";
 import { Popular } from "@/components/home/popular";
 import { PromoGrid } from "@/components/home/promo-grid";
 import { QuickLinks } from "@/components/home/quick-links";
-import { SupportCard } from "@/components/home/support-card";
 import { Testimonials } from "@/components/home/testimonials";
 import { WholesaleBand } from "@/components/home/wholesale-band";
 import { ProductRail } from "@/components/product/product-rail";
@@ -32,7 +31,7 @@ export default function HomePage() {
 
   return (
     <>
-      <Hero featured={flash.find((p) => p.category === "hookah") ?? products[0]} />
+      <Hero featured={flash.find((p) => p.category === "hookah" && p.slug !== "qalyan-shab") ?? flash[0]} />
       <QuickLinks />
       <CategoriesSection counts={counts} total={products.length} />
       <FlashDeals products={flash} />
@@ -48,9 +47,9 @@ export default function HomePage() {
       <Testimonials />
       <section className="shell pt-9 lg:pt-12">
         <SectionHead icon={CircleHelp} title="سوالات متداول" href="/faq" />
-        <div className="grid items-start gap-3 lg:grid-cols-[minmax(0,1fr)_20rem]">
-          <FaqList items={questions} />
-          <SupportCard />
+        <div className="grid items-start gap-2 lg:grid-cols-2 lg:gap-3">
+          <FaqList items={questions.slice(0, 3)} />
+          <FaqList items={questions.slice(3)} />
         </div>
       </section>
       <RecentlyViewed />

@@ -46,7 +46,7 @@
 
 @media (min-width: 64rem) {
   :root {
-    --header-h: 7.25rem;
+    --header-h: 7.5rem;
   }
 }
 
@@ -166,6 +166,21 @@
   &::-webkit-scrollbar {
     display: none;
   }
+}
+
+/* gentle bobbing for floating product art */
+@keyframes float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -10px;
+  }
+}
+
+@utility animate-float {
+  animation: float 6s ease-in-out infinite;
 }
 
 /* age gate: decided by an inline script before first paint, so it never flashes */
